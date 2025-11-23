@@ -17,8 +17,3 @@ spec:
         - name: atlas-migrations
           image: atlas-migrations:latest
           imagePullPolicy: Never
-#          ports:
-#            - containerPort: 8080
-#          env:
-#            - name: SPRING_PROFILES_ACTIVE
-#              value: ""

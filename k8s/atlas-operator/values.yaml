@@ -1,0 +1,16 @@
+# Add under spec.template.spec.volumes
+extraVolumes:
+  - name: atlas-migration
+    persistentVolumeClaim:
+      claimName: atlas-migration-pvc
+
+## Add under spec.template.spec.containers[].volumeMounts
+extraVolumeMounts:
+  - mountPath: /migrations
+    name: atlas-migration
+
+#persistence:
+#  enabled: true
+#  existingClaim: atlas-migration-pvc
+#  mountPath: /migrations
+
