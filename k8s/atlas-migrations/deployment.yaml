@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: atlas-migrations
+  namespace: atlas-operator-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: atlas-migrations
+  template:
+    metadata:
+      labels:
+        app: atlas-migrations
+    spec:
+      containers:
+        - name: atlas-migrations
+          image: atlas-migrations:latest
+          imagePullPolicy: Never
+#          ports:
+#            - containerPort: 8080
+#          env:
+#            - name: SPRING_PROFILES_ACTIVE
+#              value: ""

@@ -1,0 +1,30 @@
+apiVersion: db.atlasgo.io/v1alpha1
+kind: AtlasMigration
+metadata:
+  name: schema01
+  namespace: atlas-operator-ns
+spec:
+#  urlFrom:
+#    secretKeyRef:
+#      key: url
+#      name: postgres-credentials
+  url: postgres://myuser:mypassword@my-postgresql:5432/mydatabase?sslmode=disable
+  dir:
+    configMapRef:
+      name: schema01-configmap
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: schema02-configmap
+  namespace: atlas-operator-ns
+data:
+  schema01.sql: |
+    create table providers (
+        id int not null auto_increment,
+        name varchar(255) not null,
+        email varchar(255) unique not null,
+        short_bio varchar(255) not null,
+        primary key (id)
+    );

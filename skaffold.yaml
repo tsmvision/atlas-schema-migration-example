@@ -1,0 +1,60 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+
+build:
+  local:
+    push: false
+    tryImportMissing: true
+  artifacts:
+    - image: atlas-migrations
+      context: build/atlas-migrations
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - k8s/namespace.yaml
+    - k8s/postgresql/secret.yaml
+    - k8s/atlas-migrations/deployment.yaml
+deploy:
+  kubectl:
+    hooks:
+      # after atlas-migrations and postgresql pods deployed
+      # * waiting until postgresql is ready to accept connection
+      # * migrate db schema files using atlas cli
+      after:
+        - container:
+            podName: atlas-migrations-*
+            containerName: atlas-migrations
+            command: ["sh", "-c", "./migration-script.sh"]
+  helm:
+    releases:
+      - name: my-postgresql
+        remoteChart: postgresql
+        repo: https://charts.bitnami.com/bitnami
+        version: "18.1.10"
+        namespace: atlas-operator-ns
+        createNamespace: true
+        valuesFiles:
+          - ./k8s/postgresql/values.yaml
+#      - name: my-atlas-operator
+#        remoteChart: atlas-operator
+#        repo: https://dellnoantechnp.github.io/helm-chart-xxl-job-admin
+#        namespace: atlas-operator-ns
+#        version: "0.7.11"
+#        createNamespace: true
+#        setValues:
+#          existingClaim: atlas-migration-pvc
+#        valuesFiles:
+#          - ./k8s/atlas-operator/values.yaml
+#        # wait: true
+#
+## Port forwarding only works with 'skaffold dev', not 'skaffold run'
+## Use 'skaffold dev' to enable port forwarding to localhost:5432
+
+portForward:
+  - resourceType: service
+    resourceName: my-postgresql
+    namespace: atlas-operator-ns
+    port: 5432
+    localPort: 5432
+

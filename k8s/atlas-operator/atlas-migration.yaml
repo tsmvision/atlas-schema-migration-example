@@ -1,0 +1,14 @@
+apiVersion: db.atlasgo.io/v1alpha1
+kind: AtlasMigration
+metadata:
+  name: schema01
+  namespace: atlas-operator-ns
+spec:
+  #  urlFrom:
+  #    secretKeyRef:
+  #      key: url
+  #      name: postgres-credentials
+  url: postgres://myuser:mypassword@my-postgresql:5432/mydatabase?sslmode=disable
+  dir:
+    local:
+      path: /migrations

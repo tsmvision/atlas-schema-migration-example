@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: atlas-migration-pv
+  namespace: atlas-operator-ns
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /Users/lukelee/IdeaProjects/atlas/atlas-schema-migration-example/migration2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: atlas-migration-pvc
+  namespace: atlas-operator-ns
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
