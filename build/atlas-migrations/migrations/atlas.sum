@@ -1,3 +1,5 @@
-h1:gvny1bIIapbQgpgsBizRZUaUwGTdsvOYZp1yGFcKkck=
+h1:n0B66i02TAys2xAd06wOz787PK023l8L+GJ7uputWYE=
 20251123065832_create_providers_table.sql h1:iaIkJ5RWxBpXH7lmGdmZXAncW/1kUwu6jrEhedBUyHs=
 20251123065843_create_clients_table.sql h1:Vlokyy9k3dtmP6tQWTCmVMT9cCp0tZm/Tjd15L4W+EM=
+20251124041233_modify_first_name_column_in_client.sql h1:99wdfZ0T19eugtIzG13Lwvz3BnEx43kfd1ODVdfYff0=
+20251124041447_add_address_column_in_client.sql h1:pjx0CTx+77gI2fq4T/5pXfM8kYpZN6yeEXGPiQAHAfA=

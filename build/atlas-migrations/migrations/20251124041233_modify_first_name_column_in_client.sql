@@ -1,0 +1,2 @@
+ALTER TABLE client
+ALTER COLUMN first_name TYPE VARCHAR(100);

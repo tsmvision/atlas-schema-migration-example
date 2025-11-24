@@ -1,0 +1,2 @@
+ALTER TABLE client
+    ADD COLUMN address VARCHAR(100);
